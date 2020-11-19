@@ -3,6 +3,7 @@ import "./App.css";
 import Checkout from "./Components/App/Checkout";
 import Header from "./Components/App/Header";
 import Home from "./Components/App/Home";
+import Login from "./Components/App/Login";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
               <Checkout />
             </Route>
             <Route path="/login">
-              <h1>Login Page</h1>
+              <Login />
             </Route>
             <Route path="/">
               <Header />
