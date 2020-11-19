@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useStateValue } from "../../StateProvider";
 import AdBanner from "./Checkout/AdBanner";
+import CheckoutProduct from "./Checkout/CheckoutProduct";
+import Subtotal from "./Checkout/Subtotal";
 
 const CheckoutStyle = styled.div`
   display: flex;
@@ -14,6 +16,11 @@ const CheckoutStyle = styled.div`
   }
 
   .left {
+    .checkoutTitle {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-bottom: 1px solid lightgrey;
+    }
   }
 
   .right {
@@ -31,7 +38,7 @@ export default function Checkout() {
           <AdBanner />
           {basket?.length === 0 ? (
             <>
-              <h2>Your Amazon Cart is empty.</h2>
+              <h2 className="checkoutTitle">Your Amazon Cart is empty</h2>
               <p>
                 Your Shopping Cart lives to serve. Give it purpose — fill it
                 with groceries, clothing, household supplies, electronics, and
@@ -41,16 +48,18 @@ export default function Checkout() {
             </>
           ) : (
             <>
-              <h2>Your shopping basket</h2>
+              <h2 className="checkoutTitle">Your shopping basket</h2>
               {/* list products */}
               {basket.map((e) => {
                 console.log(e);
                 return (
                   <>
                     <CheckoutProduct
+                      key={e.id}
                       title={e.title}
                       price={e.price}
                       image={e.image}
+                      rating={e.rating}
                     />
                   </>
                 );
@@ -59,19 +68,9 @@ export default function Checkout() {
           )}
         </div>
         <div className="right">
-          <h2>Subtotal: 0.00</h2>
+          <Subtotal />
         </div>
       </CheckoutStyle>
-    </>
-  );
-}
-
-function CheckoutProduct({ title, price, image }) {
-  return (
-    <>
-      <p className="checkoutProductTitle">{title}</p>
-      <p className="checkoutProductTitle">{price}</p>
-      <img src={image} alt="" />
     </>
   );
 }
