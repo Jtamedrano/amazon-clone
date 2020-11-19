@@ -109,7 +109,7 @@ function HeaderNav({ totalBasket }) {
   return (
     <nav className="headerNav">
       <Link to="/login" className="headerLink">
-        <HeaderNavItem top={"Hello,"} bottom={"Sign In"} />
+        <HeaderNavItem top={"Hello, Guest"} bottom={"Sign In"} />
       </Link>
 
       <Link to="/" className="headerLink">
