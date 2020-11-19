@@ -21,30 +21,30 @@ const HeaderStyle = styled.div`
 
   #headerLogo {
     width: 100px;
-    margin: 18px 20px 0;
+    margin: 10px 20px 5px;
     object-fit: contain;
   }
 
   #searchBar {
     display: flex;
     flex: 1;
-  }
 
-  #searchInput {
-    height: 12px;
-    padding: 10px;
-    border: none;
-    width: 100%;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
+    #searchInput {
+      height: 30px;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
 
-  #searchIcon {
-    background-color: #cd9042;
-    padding: 5px;
-    height: 22px !important;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    #searchIcon {
+      background-color: #cd9042;
+      padding: 5px;
+      height: 30px !important;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
   }
 
   .headerNav {
