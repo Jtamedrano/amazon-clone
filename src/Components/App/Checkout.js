@@ -68,7 +68,7 @@ export default function Checkout() {
           )}
         </div>
         <div className="right">
-          <Subtotal />
+          <Subtotal basket={basket} />
         </div>
       </CheckoutStyle>
     </>
