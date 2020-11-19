@@ -1,6 +1,7 @@
 import React from "react";
 import CurrencyFormatter from "react-currency-format";
 import styled from "styled-components";
+import { getBasketTotal } from "../../../reducer";
 
 const SubtotalStyle = styled.div`
   display: flex;
@@ -33,9 +34,6 @@ const SubtotalStyle = styled.div`
 `;
 
 function Subtotal({ basket }) {
-  const getBasketTotal = (items) => {
-    return items.reduce((prev, curr) => prev + curr.price, 0);
-  };
   return (
     <SubtotalStyle>
       <CurrencyFormatter
