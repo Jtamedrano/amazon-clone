@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AuthFormStyle from "./StyleComponents/AuthFormStyle";
 import logo from "./Amazondotcom.png";
 import InputGroup from "./LoginSignup/InputGroup";
+import { auth } from "../../firebase";
 
 function Signup() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
@@ -14,7 +16,7 @@ function Signup() {
 
   const signupHandler = (evt) => {
     evt.preventDefault();
-
+    // begin testing for all possible fails
     if (!email || !password || !confPass) {
       setMissingInfo(true);
       setErrorMessage("Please Enter Missing Information");
@@ -29,6 +31,16 @@ function Signup() {
       setErrorMessage("Please agree to the Terms & Conditions");
     } else {
       setMissingInfo(false);
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((auth) => {
+          console.log(auth);
+          // if success creates a new user
+          if (auth) {
+            history.push("/");
+          }
+        })
+        .catch((err) => console.warn(err.message));
     }
   };
 
@@ -48,6 +60,7 @@ function Signup() {
             value={email}
             handleChange={(e) => setEmail(e)}
             missing={missingInfo && email === ""}
+            autoType={"email"}
           />
           <InputGroup
             name="signupPasswordInput"
@@ -56,6 +69,7 @@ function Signup() {
             value={password}
             handleChange={(e) => setPassword(e)}
             missing={missingInfo && password === ""}
+            autoType={"new-password"}
           />
           <InputGroup
             name="signupConfirmPasswordInput"
@@ -65,6 +79,7 @@ function Signup() {
             handleChange={(e) => setConfPass(e)}
             missingInfo={missingInfo}
             missing={missingInfo && (confPass === "" || password !== confPass)}
+            autoType={"off"}
           />
           <div className="signupDisclosures">
             <span>I have read and agreed to the Terms and Conditions. </span>
