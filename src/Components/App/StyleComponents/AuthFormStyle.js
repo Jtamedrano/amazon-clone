@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const AuthFormStyle = styled.div`
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #ffffff;
 
   .loginLogo {
     margin-top: 20px;

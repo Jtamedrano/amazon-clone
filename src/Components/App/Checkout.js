@@ -1,4 +1,6 @@
+import { ShortTextOutlined } from "@material-ui/icons";
 import React from "react";
+import shortid from "shortid";
 import styled from "styled-components";
 import { useStateValue } from "../../StateProvider";
 import AdBanner from "./Checkout/AdBanner";
@@ -8,11 +10,11 @@ import Subtotal from "./Checkout/Subtotal";
 const CheckoutStyle = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 1%;
+  margin-top: 0.5em;
 
   .left,
   .right {
-    margin: 1em;
+    margin: 0.5em;
   }
 
   .left {
@@ -30,6 +32,14 @@ const CheckoutStyle = styled.div`
       border: 1px solid #dddddd;
       border-radius: 3px;
     }
+  }
+
+  .right {
+    flex: 1;
+  }
+
+  @media (max-width: 550px) {
+    flex-flow: column;
   }
 `;
 
@@ -61,7 +71,7 @@ export default function Checkout() {
                   return (
                     <>
                       <CheckoutProduct
-                        key={e.id}
+                        key={shortid.generate()}
                         id={e.id}
                         title={e.title}
                         price={e.price}

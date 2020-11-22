@@ -6,7 +6,7 @@ import InputGroup from "./LoginSignup/InputGroup";
 import AuthFormStyle from "./StyleComponents/AuthFormStyle";
 
 function Login() {
-  const history = useHistory("/");
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [missingInfo, setMissingInfo] = useState(false);
@@ -30,9 +30,12 @@ function Login() {
         .signInWithEmailAndPassword(email, password)
         .then((auth) => {
           console.log(auth);
-          history.push("/");
+          // if success creates a new user
+          if (auth) {
+            history.push("/");
+          }
         })
-        .catch((error) => alert(error.message));
+        .catch((err) => console.warn(err.message));
     }
   };
 
@@ -43,7 +46,6 @@ function Login() {
       </Link>
       <div className="loginFormContainer">
         <h1>Sign In</h1>
-        {missingInfo && <div className="errorMessage">{errorMessage}</div>}
         <form onSubmit={(evt) => signIn(evt)}>
           <InputGroup
             name="signupEmailInput"
@@ -52,7 +54,6 @@ function Login() {
             value={email}
             handleChange={(e) => setEmail(e)}
             missing={missingInfo && email === ""}
-            autoType={"email"}
           />
           <InputGroup
             name="signupPasswordInput"
@@ -61,7 +62,6 @@ function Login() {
             value={password}
             handleChange={(e) => setPassword(e)}
             missing={missingInfo && password === ""}
-            autoType={"current-password"}
           />
           <input className="loginBtn" type="submit" value="Login" />
         </form>

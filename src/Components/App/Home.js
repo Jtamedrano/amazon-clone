@@ -1,23 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import Product from "./Home/Product";
+import HomeStyle from "./StyleComponents/HomeStyle";
 
-const HomeStyle = styled.div`
-  max-width: 1080px;
-  margin-left: auto;
-  margin-right: auto;
+const HomeRow = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  z-index: 1;
+  margin: auto 5px;
 
-  .homeImage {
-    width: 100%;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    z-index: -100;
-    margin-bottom: -200px;
+  .product {
+    flex-basis: ${(props) =>
+      props.spacing ? (1 / props.spacing) * 100 - 15 + "vw" : "100vw"};
+    flex: 1;
   }
 
-  .homeRow {
-    display: flex;
-    z-index: 1;
-    margin: auto 5px;
+  @media (max-width: 550px) {
+    .product {
+      flex-basis: 100%;
+    }
   }
 `;
 
@@ -30,11 +32,10 @@ function Home() {
         alt="jumbotron"
       />
 
-      <div className="homeRow">
+      <HomeRow spacing={2} className="homeRow">
         <Product
           id="0"
-          title="Brita Stainless Steel Water Bottle with Filter, 20 Ounce Premium Double Insulated Water Bottle, BPA Free, Carbon and assorted colors
-"
+          title="Brita Stainless Steel Water Bottle with Filter, 20 Ounce Premium Double Insulated Water Bottle, BPA Free, Carbon and assorted colors"
           price={24.97}
           rating={4.6}
           image={
@@ -50,8 +51,8 @@ function Home() {
             "https://images-na.ssl-images-amazon.com/images/I/51ohDLYtzDL._AC_SL1000_.jpg"
           }
         />
-      </div>
-      <div className="homeRow">
+      </HomeRow>
+      <HomeRow spacing={3} className="homeRow">
         <Product
           id="2"
           title="Introducing Fire TV Stick Lite with Alexa Voice Remote Lite (no TV controls) | HD streaming device | 2020 release"
@@ -81,8 +82,8 @@ function Home() {
             "https://images-na.ssl-images-amazon.com/images/I/61AkOuNdb6L._SL1001_.jpg"
           }
         />
-      </div>
-      <div className="homeRow">
+      </HomeRow>
+      <HomeRow spacing={1} className="homeRow">
         <Product
           id="5"
           title="Bigox Face Mask Disposable Earloop Blue 50PcsSAMSUNG 50-inch Class Crystal UHD TU-8000 Series - 4K UHD HDR Smart TV with Alexa Built-in (UN50TU8000FXZA, 2020 Model)
@@ -93,7 +94,7 @@ function Home() {
             "https://images-na.ssl-images-amazon.com/images/I/71RiQZ0J2SL._AC_SL1000_.jpg"
           }
         />
-      </div>
+      </HomeRow>
     </HomeStyle>
   );
 }

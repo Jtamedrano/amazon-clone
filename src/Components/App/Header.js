@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "../../StateProvider";
 import logo from "./ClipartKey_1478728.png";
+import { useEffect } from "react";
+import { auth } from "../../firebase";
 
 const HeaderStyle = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -50,6 +52,7 @@ const HeaderStyle = styled.div`
   .headerNav {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
   }
   .headerLink {
     color: white;
@@ -83,8 +86,6 @@ const HeaderStyle = styled.div`
 export default function Header() {
   const [{ basket }] = useStateValue();
 
-  console.log(basket);
-
   return (
     <HeaderStyle>
       <Link to="/">
@@ -106,10 +107,36 @@ function SearchBar() {
 }
 
 function HeaderNav({ totalBasket }) {
+  const [{ user }] = useStateValue();
+  const [displayName, setDisplayName] = useState("Guest");
+  const [loginBottomTxt, setLoginBottomTxt] = useState("Sign In");
+
+  useEffect(() => {
+    if (user) {
+      const userFirstName = user.displayName.split(" ")[0];
+      setDisplayName(userFirstName);
+      setLoginBottomTxt("Sign Out");
+    }
+
+    if (!user) {
+      setDisplayName("Guest");
+      setLoginBottomTxt("Sign In");
+    }
+  }, [user]);
+
+  const handleAuthentication = () => {
+    if (user) auth.signOut();
+  };
+
   return (
     <nav className="headerNav">
-      <Link to="/login" className="headerLink">
-        <HeaderNavItem top={"Hello, Guest"} bottom={"Sign In"} />
+      <Link to={!user ? "/login" : "/"} className="headerLink">
+        <div onClick={handleAuthentication}>
+          <HeaderNavItem
+            top={`Hello, ${displayName}`}
+            bottom={loginBottomTxt}
+          />
+        </div>
       </Link>
 
       <Link to="/" className="headerLink">

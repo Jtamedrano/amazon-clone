@@ -7,6 +7,8 @@ import { auth } from "../../firebase";
 
 function Signup() {
   const history = useHistory();
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
@@ -37,6 +39,7 @@ function Signup() {
           console.log(auth);
           // if success creates a new user
           if (auth) {
+            auth.user.updateProfile({ displayName: `${fName} ${lName}` });
             history.push("/");
           }
         })
@@ -53,6 +56,26 @@ function Signup() {
         <h1>Sign In</h1>
         {missingInfo && <div className="errorMessage">{errorMessage}</div>}
         <form onSubmit={(evt) => signupHandler(evt)}>
+          <div className="nameGroup">
+            <InputGroup
+              name="signupFNameInput"
+              label={"First Name: "}
+              type="text"
+              value={fName}
+              handleChange={(e) => setFName(e)}
+              missing={missingInfo && fName === ""}
+              autoType={"given-name"}
+            />
+            <InputGroup
+              name="signupLNameInput"
+              label={"Last Name: "}
+              type="text"
+              value={lName}
+              handleChange={(e) => setLName(e)}
+              missing={missingInfo && lName === ""}
+              autoType={"family-name"}
+            />
+          </div>
           <InputGroup
             name="signupEmailInput"
             label={"E-mail: "}

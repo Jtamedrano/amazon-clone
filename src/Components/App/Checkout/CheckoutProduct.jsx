@@ -6,24 +6,29 @@ const CheckoutProductStyle = styled.div`
   display: flex;
   margin-bottom: 1em;
   justify-content: flex-start;
+  height: fit-content;
 
   .imageContainer {
-    min-width: 100px;
-    max-height: 125px;
     flex-basis: 20%;
+    height: 180px;
+    width: 180px;
     margin-right: 1em;
+    align-self: stretch;
+    display: flex;
 
     img {
-      width: 100%;
-      max-height: 100%;
+      width: 180px;
+      height: 180px;
       object-fit: contain;
     }
   }
 
   .checkoutRight {
+    height: fit-content;
     .checkoutProductTitle {
       font-size: 17px;
       font-weight: 800;
+      margin-bottom: 1em;
     }
     .checkoutProductRating {
       display: flex;
@@ -46,7 +51,7 @@ const CheckoutProductStyle = styled.div`
 `;
 
 function CheckoutProduct({ id, title, price, image, rating }) {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
     // Remove Item from basket

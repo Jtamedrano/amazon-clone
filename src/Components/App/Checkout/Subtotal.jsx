@@ -12,6 +12,7 @@ const SubtotalStyle = styled.div`
   background-color: #f3f3f3;
   border: 1px solid #dddddd;
   border-radius: 3px;
+  flex: 1;
 
   small {
     display: flex;
